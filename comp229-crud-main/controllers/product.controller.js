@@ -27,6 +27,7 @@ module.exports.deleteAll = async (req, res) => {
 }
 
 module.exports.findByString = async (req, res) => {
-    let result = await ProductModel.find({ name: { $regex: /per/i } })  
+    let name = req.params.name
+    let result = await ProductModel.find({ name: { $regex: name, $options: 'i' } })  
     res.json(result)
 }

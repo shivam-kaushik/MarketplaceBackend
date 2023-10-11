@@ -10,6 +10,6 @@ router
   .put('/:_id', productController.update)
   .delete('/:_id', productController.delete)
   .delete('/', productController.deleteAll)
-  .get('/:name', productController.findByString)
+  // .get('/name/:name', productController.find)
 
 module.exports = router;
