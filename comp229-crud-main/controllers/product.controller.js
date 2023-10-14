@@ -7,8 +7,15 @@ module.exports.save = async (req, res) => {
 }
 
 module.exports.find = async (req, res) => {
-    let result = await ProductModel.find(req.params)
-    res.json(result)
+     const {name} = req.query
+    if (name) {
+        let result = await ProductModel.find({ name: { $regex: name, $options: 'i' } })  
+        res.json(result)
+    }
+    else {
+        let result = await ProductModel.find(req.params)
+        res.json(result)
+    } 
 }
 
 module.exports.update = async (req, res) => {
@@ -23,11 +30,5 @@ module.exports.delete = async (req, res) => {
 
 module.exports.deleteAll = async (req, res) => {
     let result = await ProductModel.deleteMany({})
-    res.json(result)
-}
-
-module.exports.findByString = async (req, res) => {
-    let name = req.params.name
-    let result = await ProductModel.find({ name: { $regex: name, $options: 'i' } })  
     res.json(result)
 }
